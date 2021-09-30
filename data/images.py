@@ -1,0 +1,1 @@
+loading_cat = r'/Users/civiliste/PycharmProjects/wordcloud_app/data/loading_cat.gif'
