@@ -7,6 +7,7 @@ def ceil4(n):
     return (n + 3) & ~3
 
 def ttc_to_ttf(filename):
+    #https://github.com/yhchen/ttc2ttf/blob/master/ttc2ttf.py
     in_file = open(filename, "rb")
     buf = in_file.read()
     in_file.close()
