@@ -6,6 +6,7 @@ from tkinter import font
 import tkinter
 root = tkinter.Tk()
 fonts = list(font.families())
+print(fonts)
 fonts.sort()
 root.destroy()
 
