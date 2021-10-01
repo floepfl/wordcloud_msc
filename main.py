@@ -21,13 +21,22 @@ if __name__ == '__main__':
             # loading_window = fixed_loading(loading_image)
             # curr_window.close()
             # _ = loading_window.read()
-            transform_kwargs = {'image_path': 'data/abstract.png',
-                                'words_path': 'data/communes.csv',
-                                'contour_width': 0,
-                                'min_font_size': 3,
-                                'max_font_size': 120,
+            print(values)
+            transform_kwargs = {'image_path': values['_INPUT_IMAGE_'],
+                                'words_path': values['_INPUT_WORDS_'],
+                                'font_path': values['_INPUT_FONT_'],
+                                'max_words': values['_SLIDER_MAX_WORDS_'],
+                                'hv_ratio': values['_SLIDER_H/V_RATIO_'],
+                                'relative_scaling': values['_SLIDER_RELATIVE_SCALING_'],
+                                'scale': values['_SLIDER_SCALE_'],
+                                'canvas_width': values['_INPUT_CANVAS_WIDTH_'],
+                                'canvas_height': values['_INPUT_CANVAS_HEIGHT_'],
+                                'contour_width': values['_SLIDER_CONTOUR_WIDTH_'],
+                                'min_font_size': values['_SLIDER_MIN_FONT_'],
+                                'max_font_size': values['_SLIDER_MAX_FONT_'],
+                                'colormap': values['_INPUT_COLORMAP_'],
                                 }
-            wordcloud_image = transform(**transform_kwargs)
+            wordcloud_image_str, preview_wordcloud_image_str = transform(**transform_kwargs)
             # transform_process = threading.Thread(name='transform', target=transform, kwargs=transform_kwargs)
             # transform_process.start()
             # while transform_process.is_alive():
@@ -35,11 +44,11 @@ if __name__ == '__main__':
             #     loading_window.Element('_LOADING_GIF_').UpdateAnimation(loading_gif, time_between_frames=0.05)
             # loading_window.close()
             curr_window.close()
-            curr_window = main_window(font=font, image=sg.Image(wordcloud_image))
-
+            curr_window = main_window(font=font, image=sg.Image(preview_wordcloud_image_str))
         elif event in (sg.WIN_CLOSED, 'Cancel') and last_window is not None:
             curr_window = last_window
             last_window = None
+
         elif event in (sg.WIN_CLOSED, 'Cancel'):
             break
 
