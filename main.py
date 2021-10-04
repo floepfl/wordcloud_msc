@@ -3,6 +3,21 @@ from gui import *
 from wordcloud_transform import *
 import threading
 from data.images import *
+import sys
+import PySimpleGUI as sg
+from tkinter import font
+from fonts_wrangling.png_base64_fonts import base64_font_dict
+import base64
+import tkinter
+import tkinter as tk
+import pyglet
+import os
+
+root = tkinter.Tk()
+font_names_for_preview = list(base64_font_dict.keys())
+font_names_for_preview.sort()
+default_font = font_names_for_preview[0]
+root.destroy()
 
 if __name__ == '__main__':
     font = ('Helvetica', 16)
@@ -14,14 +29,16 @@ if __name__ == '__main__':
     while True:
         event, values = curr_window.read()
         print(event, values)
-        if event == 'go_to_colormaps':
+        if event == 'colormaps':
             last_window = curr_window
             curr_window = colormap_window()
+        elif event == 'settings':
+            last_window = curr_window
+            curr_window = settings_window(font, font_names_for_preview, base64_font_dict, default_font)
         elif event == 'transform':
             # loading_window = fixed_loading(loading_image)
             # curr_window.close()
             # _ = loading_window.read()
-            print(values)
             transform_kwargs = {'image_path': values['_INPUT_IMAGE_'],
                                 'words_path': values['_INPUT_WORDS_'],
                                 'font_path': values['_INPUT_FONT_'],
@@ -48,7 +65,9 @@ if __name__ == '__main__':
         elif event in (sg.WIN_CLOSED, 'Cancel') and last_window is not None:
             curr_window = last_window
             last_window = None
-
+        elif values['_FONT_LIST_'] is not None and len(values['_FONT_LIST_']) >= 1:
+            preview_image_elem = curr_window['_PREVIEW_IMAGE_']
+            preview_image_elem.update(source=base64_font_dict[values['_FONT_LIST_'][0]])
         elif event in (sg.WIN_CLOSED, 'Cancel'):
             break
 

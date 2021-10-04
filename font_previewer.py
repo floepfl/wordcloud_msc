@@ -50,6 +50,5 @@ while True:     # Event Loop
         # MyLabel.pack()
         # root.mainloop()
         # text_elem.update(font=values['-list-'][0])
-
         preview_image_elem.update(source=base64_font_dict[values['_FONT_LIST_'][0]])
 window.close()
