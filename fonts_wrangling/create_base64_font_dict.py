@@ -19,6 +19,6 @@ if __name__ == '__main__':
 
     # Save to file
     with open('base64_fonts.py', 'w') as f:
-        print('b64_font_dict = ', file=f)
+        print('b64_font_dict = ', end='', file=f)
         print(b64_font_dict, file=f)
 

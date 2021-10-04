@@ -16,3 +16,4 @@ font_wrangling/base64_fonts.py filter=lfs diff=lfs merge=lfs -text
 /worldcloud.ipynb filter=lfs diff=lfs merge=lfs -text
 /data/fonts/Arial Unicode MS/Arial Unicode.ttf filter=lfs diff=lfs merge=lfs -text
 /fonts_wrangling/base64_fonts.py filter=lfs diff=lfs merge=lfs -text
+/fonts_wrangling/__pycache__/base64_fonts.cpython-38.pyc filter=lfs diff=lfs merge=lfs -text
