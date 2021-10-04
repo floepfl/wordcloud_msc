@@ -2,29 +2,30 @@ import PySimpleGUI as sg
 from wordcloud_transform import transform
 from data.images import *
 
-def main_window(font, image):
-    sg.theme('DarkAmber')   # Add a little color to your windows
-    # All the stuff inside your window. This is the PSG magic code compactor...
-    text_size = (20, 1)
-    button_size = (15, 1)
-    layout = [[sg.Column([[sg.Text('Input image: ', font=font, size=text_size),
-                           sg.Input(key='_INPUT_IMAGE_', default_text='.png or .jpg/jpeg', font=font),
-                           sg.FilesBrowse(font=font, size=(10,1))],
-                [sg.Text('Words:', font=font, size=text_size),
-                 sg.Input(key='_INPUT_WORDS_', default_text='.numbers, .xlsx or .csv', font=font),
-                 sg.FilesBrowse(font=font, size=(10,1))],
-                [sg.Text('Colormap:', font=font, size=text_size),
-                 sg.InputText(font=font, default_text='None', key='_INPUT_COLORMAP_'),
-                 sg.Button('See colormaps', key='colormaps', font=font)],
-                [sg.Button('Settings', key='settings', size=(15,2), font=font),
-                 sg.Button('Transform', key='transform', size=(15,2), font=font)]]),
-               image]]
+class MainWindow():
+    def main_window(self, font, image):
+        sg.theme('DarkAmber')   # Add a little color to your windows
+        # All the stuff inside your window. This is the PSG magic code compactor...
+        text_size = (20, 1)
+        button_size = (15, 1)
+        layout = [[sg.Column([[sg.Text('Input image: ', font=font, size=text_size),
+                               sg.Input(key='_INPUT_IMAGE_', default_text='.png or .jpg/jpeg', font=font),
+                               sg.FilesBrowse(font=font, size=(10,1))],
+                    [sg.Text('Words:', font=font, size=text_size),
+                     sg.Input(key='_INPUT_WORDS_', default_text='.numbers, .xlsx or .csv', font=font),
+                     sg.FilesBrowse(font=font, size=(10,1))],
+                    [sg.Text('Colormap:', font=font, size=text_size),
+                     sg.InputText(font=font, default_text='None', key='_INPUT_COLORMAP_'),
+                     sg.Button('See colormaps', key='colormaps', font=font)],
+                    [sg.Button('Settings', key='settings', size=(15,2), font=font),
+                     sg.Button('Transform', key='transform', size=(15,2), font=font)]]),
+                   image]]
 
-    #TODO scale, preview size, transparent_background, repeat
+        #TODO scale, preview size, transparent_background, repeat
 
-    # layout = [[sg.Column([[sg.Text('Input image: ', font=font)], [sg.Text('Horizontal/Vertical ratio', font=font)]]),
-    #                        sg.Column([[sg.Text('Horizontal/Vertical ratio', font=font)], [sg.Slider(range=(0,100))]])]]
-    return sg.Window('Window Title', layout)
+        # layout = [[sg.Column([[sg.Text('Input image: ', font=font)], [sg.Text('Horizontal/Vertical ratio', font=font)]]),
+        #                        sg.Column([[sg.Text('Horizontal/Vertical ratio', font=font)], [sg.Slider(range=(0,100))]])]]
+        return sg.Window('Window Title', layout)
 
 def settings_window(font, font_names_for_preview, base64_font_dict, default_font):
     sg.theme('DarkAmber')  # Add a little color to your windows
