@@ -46,8 +46,8 @@ class MainWindow(Window):
                 # _ = loading_window.read()
                 transform_kwargs = {'image_path': values['_INPUT_IMAGE_'],
                                     'words_path': values['_INPUT_WORDS_']}
-
                 all_transform_kwargs = {**transform_kwargs, **self.subwindows['settings'].transform_kwargs} #TODO add proper recursive strategy
+                print(all_transform_kwargs)
                 wordcloud_image_str, preview_wordcloud_image_str = transform(**all_transform_kwargs)
                 self.window['_IMAGE_PREVIEW_'].update(source=preview_wordcloud_image_str)
             elif event in (sg.WIN_CLOSED, 'Cancel'):

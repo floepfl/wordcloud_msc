@@ -107,12 +107,16 @@ class SettingsWindow(Window):
         self.layout()
         while True:
             if self.values_before_hidden:
-                event, _ = self.window.read()
-                values = self.values_before_hidden
+                event, new_values = self.window.read()
+                if new_values is not None:
+                    values = new_values
+                else:
+                    values = self.values_before_hidden
                 self.values_before_hidden = None
             else:
                 event, values = self.window.read()
-                
+            print(values['_INPUT_COLORMAP_'])
+
             if event == '_BUTTON_COLORMAPS_':
                 self.window.hide()
                 self.values_before_hidden = values
@@ -131,15 +135,16 @@ class SettingsWindow(Window):
 
     def update_transform_kwargs(self, values):
         selected_font = values['_FONT_LIST_'] if values['_FONT_LIST_'] else self.window['_FONT_LIST_'].DefaultValues[0]
+        print(values['_INPUT_COLORMAP_'])
         self.transform_kwargs = {'font_path': selected_font,
-                'max_words': values['_SLIDER_MAX_WORDS_'],
+                'max_words': int(values['_SLIDER_MAX_WORDS_']),
                 'hv_ratio': values['_SLIDER_H/V_RATIO_'],
                 'relative_scaling': values['_SLIDER_RELATIVE_SCALING_'],
                 'scale': values['_SLIDER_SCALE_'],
                 'canvas_width': values['_INPUT_CANVAS_WIDTH_'],
                 'canvas_height': values['_INPUT_CANVAS_HEIGHT_'],
                 'contour_width': values['_SLIDER_CONTOUR_WIDTH_'],
-                'min_font_size': values['_SLIDER_MIN_FONT_'],
-                'max_font_size': values['_SLIDER_MAX_FONT_'],
+                'min_font_size': int(values['_SLIDER_MIN_FONT_']),
+                'max_font_size': int(values['_SLIDER_MAX_FONT_']),
                 'colormap': values['_INPUT_COLORMAP_']}
 

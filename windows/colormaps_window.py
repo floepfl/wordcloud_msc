@@ -6,7 +6,6 @@ class ColormapsWindow(Window):
 
     def __init__(self):
         super(ColormapsWindow, self).__init__()
-        self.layout()
 
     def layout(self):
         sg.theme('DarkAmber')  # Add a little color to your windows
@@ -21,6 +20,7 @@ class ColormapsWindow(Window):
         self.window = sg.Window('Window Title', layout)
 
     def run(self):
+        self.layout()
         while True:
             event, values = self.window.read()
             if event in (sg.WIN_CLOSED, 'Cancel'):
