@@ -36,10 +36,12 @@ def transform(image_path, words_path, font_path, max_words, hv_ratio,
     words_and_weights_df = pd.read_csv(words_path, sep=';')
     words_and_weights_dict = dict(zip(words_and_weights_df.iloc[:, 0],
                                       words_and_weights_df.iloc[:, 1]))
-    image = Image.open(path.join(os.getcwd(), image_path))
+    image = Image.open(path.join(os.getcwd(), image_path)).convert('RGBA')
     new_image = Image.new("RGBA", image.size, "WHITE") # Create a white rgba background
     new_image.paste(image, (0, 0), image)
-    coloring = np.array(Image.open(path.join(os.getcwd(), image_path)))
+    # coloring = np.array(Image.open(path.join(os.getcwd(), image_path)))
+    coloring = np.array(new_image)
+
     font_path = create_ttf_file(font_path[0])
     if colormap != 'None':
         wc = WordCloud(background_color=None, mode='RGBA', font_path=font_path, max_words=max_words, mask=coloring,
