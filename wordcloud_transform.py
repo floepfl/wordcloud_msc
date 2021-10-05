@@ -51,17 +51,16 @@ def transform(image_path, words_path, font_path, max_words, hv_ratio,
     else:
         wc = WordCloud(background_color=None, mode='RGBA', font_path=font_path, max_words=max_words, mask=coloring,
                        stopwords=None, contour_width=contour_width, min_font_size=min_font_size,
-                       prefer_horizontal=hv_ratio / 100,
+                       prefer_horizontal=hv_ratio / 100, repeat=True,
                        scale=scale, width=canvas_width, height=canvas_height,
                        max_font_size=max_font_size, random_state=42, relative_scaling=relative_scaling / 100)
         wc.generate_from_frequencies(words_and_weights_dict)
         image_colors = ImageColorGenerator(coloring)
         wc = wc.recolor(color_func=image_colors).to_image()
-
+    output_image_size = wc.size
     preview_wc = wc.resize(size=(1024, 1024))
-    wc_str = pil_image_to_base64(wc)
     preview_wc_str = pil_image_to_base64(preview_wc)
-    return wc_str, preview_wc_str
+    return wc, preview_wc_str, output_image_size
 
     # # show
     # fig, ax = plt.subplots(1, 1)
