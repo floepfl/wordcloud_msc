@@ -16,20 +16,21 @@ class MainWindow(Window):
     def layout(self):
         sg.theme('DarkAmber')  # Add a little color to your windows
         text_size = (20, 1)
-        button_size = (15, 1)
+        button_size = (12, 2)
         layout = [[sg.Column([[sg.Text('Input image: ', font=self.font, size=text_size),
-                               sg.Input(key='_INPUT_IMAGE_', default_text='.png or .jpg/jpeg', font=self.font),
+                               sg.Input(key='_INPUT_IMAGE_', default_text='Choose .png file', font=self.font),
                                sg.FilesBrowse(font=self.font, size=(10, 1))],
                               [sg.Text('Words:', font=self.font, size=text_size),
-                               sg.Input(key='_INPUT_WORDS_',enable_events=True, default_text='.numbers, .xlsx or .csv', font=self.font),
+                               sg.Input(key='_INPUT_WORDS_',enable_events=True, default_text='Choose .csv file', font=self.font),
                                sg.FilesBrowse(font=self.font,enable_events=True, size=(10, 1))],
                               [sg.Text('', font=self.font,
                                        key='_OUTPUT_IMAGE_SIZE', visible=False)],
-                              [sg.Button('Settings', key='_BUTTON_SETTINGS_', size=(15, 2), font=self.font),
-                               sg.Button('Transform', key='_BUTTON_TRANSFORM_', size=(15, 2), font=self.font),
-                               sg.Input(key='_TEXT_SAVE_IMAGE_', enable_events=True, default_text='.numbers, .xlsx or .csv',
+                              [sg.Button('Settings', key='_BUTTON_SETTINGS_', size=button_size, font=self.font),
+                               sg.Button('Exit', key='_BUTTON_EXIT_', size=button_size, font=self.font),
+                               sg.Button('Transform', key='_BUTTON_TRANSFORM_', size=button_size, font=self.font),
+                               sg.Input(key='_TEXT_SAVE_IMAGE_', enable_events=True, default_text='.csv',
                                         font=self.font, visible=False),
-                               sg.Button('Save image', enable_events=True, target=(ThisRow, -1), key='_BUTTON_SAVE_IMAGE_', size=(15, 2), font=self.font,
+                               sg.Button('Save image', enable_events=True, target=(ThisRow, -1), key='_BUTTON_SAVE_IMAGE_', size=button_size, font=self.font,
                                              button_type=BUTTON_TYPE_SAVEAS_FILE, visible=False, file_types=('.png'),
                                          default_extension='.png')]]),
                    self.default_image_preview]]
@@ -37,7 +38,7 @@ class MainWindow(Window):
         # TODO scale, preview size, transparent_background, repeat
         # layout = [[sg.Column([[sg.Text('Input image: ', font=font)], [sg.Text('Horizontal/Vertical ratio', font=font)]]),
         #                        sg.Column([[sg.Text('Horizontal/Vertical ratio', font=font)], [sg.Slider(range=(0,100))]])]]
-        self.window = sg.Window('Window Title', layout)
+        self.window = sg.Window('', layout)
 
     def run(self):
         self.layout()
@@ -63,7 +64,7 @@ class MainWindow(Window):
                                                                f'(width x height in pixels)', visible=True)
             elif event == '_TEXT_SAVE_IMAGE_':
                 self.wordcloud_image.save(values['_TEXT_SAVE_IMAGE_'], 'PNG')
-            elif event in (sg.WIN_CLOSED, 'Cancel'):
+            elif event in (sg.WIN_CLOSED, 'Cancel', '_BUTTON_EXIT_'):
                 self.window.close()
                 break
 

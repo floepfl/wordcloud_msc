@@ -1,10 +1,9 @@
-from fontpreview import FontPreview
 import base64
+import os
+import sys
 from io import BytesIO
-import sys, os
-import matplotlib.pyplot as plt
-from matplotlib.pyplot import imshow
-import numpy as np
+from fontpreview import FontPreview
+
 
 def ttf_to_base64png(font_file_path, preview_text):
     fp = FontPreview(font_file_path)

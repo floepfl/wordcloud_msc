@@ -1,22 +1,10 @@
-import PySimpleGUI as sg
 from windows.main_window import MainWindow
-from windows.colormaps_window import ColormapsWindow
-from windows import *
-from wordcloud_transform import *
-import threading
-from data.images import *
-import sys
-import PySimpleGUI as sg
-from tkinter import font
-from fonts_wrangling.png_base64_fonts import base64_font_dict
-import base64
-import tkinter
 import tkinter as tk
-import pyglet
-import os
 
+from fonts_wrangling.png_base64_fonts import base64_font_dict
+from windows.main_window import MainWindow
 
-root = tkinter.Tk()
+root = tk.Tk()
 font_names_for_preview = list(base64_font_dict.keys())
 font_names_for_preview.sort()
 default_font = font_names_for_preview[0]

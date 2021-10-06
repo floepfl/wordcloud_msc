@@ -1,15 +1,15 @@
-import pandas as pd
-from os import path
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
-import os
-import re
-from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
-from scipy.stats import pareto
 import base64
+import os
 from io import BytesIO
+from os import path
+
+import numpy as np
+import pandas as pd
+from PIL import Image
+from wordcloud import WordCloud, ImageColorGenerator
+
 from fonts_wrangling.base64_fonts import b64_font_dict
+
 
 def pil_image_to_base64(pil_image):
     buffered = BytesIO()
@@ -31,9 +31,12 @@ def create_ttf_file(font_name):
 
 def transform(image_path, words_path, font_path, max_words, hv_ratio,
               relative_scaling, scale, canvas_width, canvas_height,
-              contour_width, min_font_size, max_font_size, colormap):
+              contour_width, min_font_size, max_font_size, colormap,
+              random_state, shuffle_words, repeat):
 
     words_and_weights_df = pd.read_csv(words_path, sep=';')
+    if shuffle_words:
+        words_and_weights_df = words_and_weights_df.sample(frac=1, random_state=random_state).reset_index(drop=True)
     words_and_weights_dict = dict(zip(words_and_weights_df.iloc[:, 0],
                                       words_and_weights_df.iloc[:, 1]))
     image = Image.open(path.join(os.getcwd(), image_path)).convert('RGBA')
@@ -46,17 +49,18 @@ def transform(image_path, words_path, font_path, max_words, hv_ratio,
     if colormap != 'None':
         wc = WordCloud(background_color=None, mode='RGBA', font_path=font_path, max_words=max_words, mask=coloring,
                        stopwords=None, contour_width=contour_width, min_font_size=min_font_size, prefer_horizontal=hv_ratio / 100,
-                       scale=scale, width=canvas_width, height=canvas_height, colormap=colormap,
-                       max_font_size=max_font_size, random_state=42, relative_scaling=relative_scaling / 100)
+                       scale=scale, width=canvas_width, height=canvas_height, colormap=colormap, repeat=repeat,
+                       max_font_size=max_font_size, random_state=random_state, relative_scaling=relative_scaling / 100)
         wc.generate_from_frequencies(words_and_weights_dict)
         wc = wc.to_image()
     else:
         wc = WordCloud(background_color=None, mode='RGBA', font_path=font_path, max_words=max_words, mask=coloring,
                        stopwords=None, contour_width=contour_width, min_font_size=min_font_size,
-                       prefer_horizontal=hv_ratio / 100, repeat=True,
+                       prefer_horizontal=hv_ratio / 100, repeat=repeat,
                        scale=scale, width=canvas_width, height=canvas_height,
-                       max_font_size=max_font_size, random_state=42, relative_scaling=relative_scaling / 100)
+                       max_font_size=max_font_size, random_state=random_state, relative_scaling=relative_scaling / 100)
         wc.generate_from_frequencies(words_and_weights_dict)
+        print(coloring.shape)
         image_colors = ImageColorGenerator(coloring)
         wc = wc.recolor(color_func=image_colors).to_image()
     output_image_size = wc.size
