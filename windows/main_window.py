@@ -12,7 +12,7 @@ class MainWindow(Window):
         super(MainWindow, self).__init__()
         self.subwindows['settings'] = SettingsWindow(font, font_names_for_preview, base64_font_dict, default_font)
         self.font = font
-        self.default_image_preview = sg.Image(base64_images_dict['default_image_preview'], key='_IMAGE_PREVIEW_')
+        self.default_image_preview = sg.Image(base64_images_dict['image_placeholder'], key='_IMAGE_PREVIEW_')
 
     def layout(self):
         sg.theme('DarkAmber')  # Add a little color to your windows

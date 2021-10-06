@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from .window import Window
+from fonts_wrangling.base64_images import base64_images_dict
 
 
 class ColormapsWindow(Window):
@@ -14,12 +15,12 @@ class ColormapsWindow(Window):
         sg.theme('DarkAmber')  # Add a little color to your windows
         # All the stuff inside your window. This is the PSG magic code compactor...
         layout = [
-            [sg.Image(r'/Users/civiliste/PycharmProjects/wordcloud_app/data/cyclic_and_uniform_sequential.png'),
-             sg.Image(r'/Users/civiliste/PycharmProjects/wordcloud_app/data/sequential_2.png'),
-             sg.Image(r'/Users/civiliste/PycharmProjects/wordcloud_app/data/qualitative.png')],
-            [sg.Image(r'/Users/civiliste/PycharmProjects/wordcloud_app/data/sequential_1.png'),
-             sg.Image(r'/Users/civiliste/PycharmProjects/wordcloud_app/data/diverging.png'),
-             sg.Image(r'/Users/civiliste/PycharmProjects/wordcloud_app/data/misc.png') ],
+            [sg.Image(base64_images_dict['cyclic_and_uniform_sequential']),
+             sg.Image(base64_images_dict['sequential_2']),
+             sg.Image(base64_images_dict['qualitative'])],
+            [sg.Image(base64_images_dict['sequential_1']),
+             sg.Image(base64_images_dict['diverging']),
+             sg.Image(base64_images_dict['misc']) ],
         [sg.Button('Back', key='_BUTTON_BACK_', font=self.font, size=self.button_size)]]
         self.window = sg.Window('', layout)
 

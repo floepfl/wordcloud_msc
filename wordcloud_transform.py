@@ -64,7 +64,7 @@ def transform(image_path, words_path, font_path, max_words, hv_ratio,
         image_colors = ImageColorGenerator(coloring)
         wc = wc.recolor(color_func=image_colors).to_image()
     output_image_size = wc.size
-    preview_wc = wc.resize(size=(1024, 1024))
+    preview_wc = wc.resize(size=(800, 800))
     preview_wc_str = pil_image_to_base64(preview_wc)
     return wc, preview_wc_str, output_image_size
 
