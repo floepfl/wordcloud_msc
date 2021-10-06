@@ -1,20 +1,2 @@
-font_wrangling/base64_fonts.py filter=lfs diff=lfs merge=lfs -text
-*.DS_Store filter=lfs diff=lfs merge=lfs -text
-*.gitignore filter=lfs diff=lfs merge=lfs -text
-*.xml filter=lfs diff=lfs merge=lfs -text
-*.iml filter=lfs diff=lfs merge=lfs -text
-*.png filter=lfs diff=lfs merge=lfs -text
-*.gif filter=lfs diff=lfs merge=lfs -text
-*.py filter=lfs diff=lfs merge=lfs -text
-*.ipynb filter=lfs diff=lfs merge=lfs -text
-*.pyc filter=lfs diff=lfs merge=lfs -text
-*.csv filter=lfs diff=lfs merge=lfs -text
-*.numbers filter=lfs diff=lfs merge=lfs -text
-*.ttf filter=lfs diff=lfs merge=lfs -text
-*.dfont filter=lfs diff=lfs merge=lfs -text
-*.md filter=lfs diff=lfs merge=lfs -text
-* !text !filter !merge !diff
-/worldcloud.ipynb filter=lfs diff=lfs merge=lfs -text
-/data/fonts/Arial Unicode MS/Arial Unicode.ttf filter=lfs diff=lfs merge=lfs -text
 /fonts_wrangling/base64_fonts.py filter=lfs diff=lfs merge=lfs -text
 /fonts_wrangling/__pycache__/base64_fonts.cpython-38.pyc filter=lfs diff=lfs merge=lfs -text
