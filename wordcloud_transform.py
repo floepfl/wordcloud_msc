@@ -34,7 +34,7 @@ def transform(image_path, words_path, font_path, max_words, hv_ratio,
               contour_width, min_font_size, max_font_size, colormap,
               random_state, shuffle_words, repeat):
 
-    words_and_weights_df = pd.read_csv(words_path, sep=';')
+    words_and_weights_df = pd.read_csv(words_path, sep=',', header=None)
     if shuffle_words:
         words_and_weights_df = words_and_weights_df.sample(frac=1, random_state=random_state).reset_index(drop=True)
     words_and_weights_dict = dict(zip(words_and_weights_df.iloc[:, 0],
